@@ -1,0 +1,22 @@
+{
+  "name": "project8",
+  "version": "1.0.0",
+  "description": "Weather app using Angular, Express.js, and tomorrow.io API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hyun Jun Yim",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-await": "^1.1.0",
+    "https": "^1.0.0",
+    "https-proxy-agent": "^5.0.0",
+    "node-fetch": "^2.6.1",
+    "request": "^2.88.2"
+  }
+}

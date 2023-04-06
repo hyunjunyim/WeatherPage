@@ -1,0 +1,119 @@
+highcharts-chart {
+    width: 100%;
+    display: block;
+}
+
+.detailRow:nth-child(odd) {background-color: #f2f2f2;}
+.detailRow:hover {
+    cursor: default;
+}
+
+.twitter-share-button {
+    float: right;
+    margin-right: 15%;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-style: solid;
+    border-color: gainsboro;
+    
+    border-width: 2px;
+}
+
+#tweet-icon {
+    width: 30px;
+    height: 30px;
+}
+
+agm-map {
+    height: 100%;
+    margin: 0 auto;
+}
+
+.codeImage {
+    height: 30px;
+    width: 30px;
+}
+
+.titleLine {
+    text-align: center;
+    font-weight: bold;
+}
+
+mat-tab-group {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.progress {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.nav-tabs {
+    width: 70%;
+    margin: 0 auto;
+}
+
+tr:hover {
+    cursor: pointer;
+}
+
+.chartContainer {
+    margin: 0 auto !important;
+    width: 70% !important;
+    height: 700px !important;
+    min-width: 400px;
+}
+
+#starButton {
+    float: right;
+    /* margin-right: 10%; */
+}
+
+#detailViewButton {
+    float: right;
+    margin-right: 15%;
+}
+
+#backToList {
+    margin-left: 15%;
+}
+
+/* ng-template {
+    width: 70%;
+    margin: 0 auto;
+} */
+
+#mapContainer {
+    width: 70%;
+    height: 400px;
+    margin: 0 auto;
+}
+
+u {
+    color: blue;
+}
+
+table {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.demo-table {
+    width: 100%;
+}
+  
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+  
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+  
+/* .demo-row-is-clicked {
+    font-weight: bold;
+} */

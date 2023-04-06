@@ -1,0 +1,78 @@
+#searchArea {
+    margin: 0 auto;
+    background-color: gainsboro;
+    border-radius: 10px;
+    border: 2px solid rgb(189, 186, 186);
+    padding: 20px;
+    width: 60%;
+    min-width: 375px;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.form-horizontal {
+    margin: 0 10% 7% 10%;
+}
+
+#state-options {
+    /* width: 30%;
+    margin-left: 10%; */
+    appearance: none;
+    /* min-width: 200px; */
+    overflow-y: hidden;
+}
+
+select {
+    overflow-y: auto;
+}
+#input-clear{ 
+    float: left;
+}
+#submitButton {
+    float:left;
+    margin-left: 5%;
+    margin-right: 10px;
+}
+/* 
+label {
+    display: inline-block;
+    padding-right: 10px;
+} */
+span {
+    color: red;
+}
+
+#tabsHere {
+    padding-bottom: 50px;
+}
+
+#submitButton {
+    width: 100px;
+}
+
+#clear-icon {
+    color: black;
+    transform: rotateY(180deg);
+}
+
+.material-icons {
+    color: white;
+    display: inline;
+}
+
+.nav-pills {
+    padding-top: 10px;
+}
+
+#cityNameShow {
+    color: black;
+}
+
+/* input {
+    width: 80%;
+    display: inline;
+} */
+
+#auto-loc {
+    width: 15px;
+}

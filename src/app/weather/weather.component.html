@@ -1,0 +1,199 @@
+<!-- <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+</div> -->
+<br><br>
+<p *ngIf="apiOver">
+  <ngb-alert [dismissible]="false" style="width:60%; margin: 0 auto;">
+    <strong>Warning!</strong> Api call limit has reached.
+  </ngb-alert>
+</p>
+<div id="tabsHere" *ngIf="!apiOver">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills justify-content-center">
+    <li [ngbNavItem]="1" [destroyOnHide]="false">
+      <a ngbNavLink>Results</a>
+      <ng-template ngbNavContent>
+        <div *ngIf="showTable && !rowClicked && !dataLoading && !apiOver" [@slideInOut]>
+          <button id="detailViewButton" (click)="toggleView()" [disabled]="!rowDataGen">
+            Details >
+          </button>
+          <button id="starButton" (click)="onClickStar()">
+            <svg
+              *ngIf="inFavorite"
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+              class="bi bi-star-fill mx-1 my-0"
+              fill="#FFC300"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="star-fill-icon"
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+              />
+            </svg>
+            <svg
+              *ngIf="!inFavorite"
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+              class="bi bi-star mx-1 my-0"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="star-icon"
+                fill-rule="evenodd"
+                d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
+              />
+            </svg>
+          </button>
+          <br><br>
+          <h2 class="titleLine">Forecast at {{this.cityName}}, {{this.stateName}}</h2>
+          <br><br>
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active1" class="nav-tabs justify-content-end">
+            <li [ngbNavItem]="1" [destroyOnHide]="false">
+              <a ngbNavLink>Day View</a>
+              <ng-template ngbNavContent>
+                <table class="table">
+                  <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Temp. High ( °F)</th>
+                    <th>Temp. Low ( °F)</th>
+                    <th>Wind Speed (mph)</th>
+                  </tr>
+                  <tr *ngFor="let x of dataSource;" (click)="showClicked(x.index)">
+                    <td>{{x.index}}</td>
+                    <td><u>{{x.date}}</u></td>
+                    <td><img class="codeImage" [src]="this.weatherCodeImg[x.stat]" alt="WeatherCode-Image">{{this.weatherCodeDict[x.stat]}}</td>
+                    <td>{{x.maxTemp}}</td>
+                    <td>{{x.minTemp}}</td>
+                    <td>{{x.wsp}}</td>
+                  </tr>
+                </table>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2" [destroyOnHide]="false">
+              <a ngbNavLink>Daily Temp. Chart</a>
+              <ng-template ngbNavContent>
+                <div class="chartContainer">
+                  <highcharts-chart 
+                      [Highcharts]="Highcharts" 
+                      [options]="chartOptions">
+                  </highcharts-chart>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3" [destroyOnHide]="false">
+              <a ngbNavLink>Meteogram</a>
+              <ng-template ngbNavContent>
+                <div class="chartContainer">
+                  <highcharts-chart 
+                      [Highcharts]="chart" 
+                      [options]="chartOptions1">
+                  </highcharts-chart>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+          
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+        
+        <div *ngIf="rowClicked && !showTable" [@slideOutIn]>
+          <button id="backToList" (click)="toggleView()">List</button>
+          
+          <a class="twitter-share-button"
+            href="https://twitter.com/intent/tweet?text=The%20temperature%20in%20{{this.cityName}},%20{{this.stateName}}%20on%20{{this.dateLabel}}%20is%20{{this.tableData.temperature}}%20°F.%20The%20weather%20conditions%20are%20{{this.weatherCodeDict[this.tableData.weatherCode]}}+%23CSCI571WeatherForecast"
+            data-size="large"
+            data-hashtags="CSCI571WeatherForecast"
+            target="_newwin">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+              <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+            </svg></a>
+          <br><br>
+          <h2 class="titleLine">{{this.dateLabel}}</h2>
+          <table class="table table-striped">
+            <tr class="detailRow">
+              <td class="col-6 col-md-3" style="font-weight: bold;">Status</td>
+              <td>{{this.weatherCodeDict[this.tableData.weatherCode]}}</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Max Temperature</td>
+              <td>{{this.tableData.temperatureMax}} °F</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Min Temperature</td>
+              <td>{{this.tableData.temperatureMin}} °F</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Apparent Temperature</td>
+              <td>{{this.tableData.temperatureApparent}} °F</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Sun Rise Time</td>
+              <td>{{this.tableData.sunriseTime.slice(11,19)}}</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Sun Set Time</td>
+              <td>{{this.tableData.sunsetTime.slice(11,19)}}</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Humidity</td>
+              <td>{{this.tableData.humidity}} %</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Wind Speed</td>
+              <td>{{this.tableData.windSpeed}}</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Visibility</td>
+              <td>{{this.tableData.visibility}} mi</td>
+            </tr>
+            <tr class="detailRow">
+              <td class="col-6 col-md-4" style="font-weight: bold;">Cloud Cover</td>
+              <td>{{this.tableData.cloudCover}} %</td>
+            </tr>
+          </table>
+          <div id="mapContainer">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
+              <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            </agm-map>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" [destroyOnHide]="false">
+      <a ngbNavLink>Favorites</a>
+      <ng-template ngbNavContent>
+        <p>
+          <ngb-alert *ngIf="favEmpty" [dismissible]="false" style="width: 60%; margin: 10px auto;"><strong>Sorry!</strong> No records found.</ngb-alert>
+        </p>
+        <table class="table" *ngIf="!favEmpty">
+          <tr>
+            <th>#</th>
+            <th>City</th>
+            <th>State</th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let y of favs; let k = index">
+            <td>{{k+1}}</td>
+            <td>{{y.city}}</td>
+            <td><u>{{y.state}}</u></td>
+            <td><button (click)="onClickTrash()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+            </svg></button></td>
+          </tr>
+        </table>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="ml-4"></div>
+</div>
+
+<br>
+<div class="progress" *ngIf="dataLoading && !apiOver">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+</div>
+<br>
