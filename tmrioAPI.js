@@ -1,5 +1,4 @@
-const tmr_key = 'FhCioXeQJ94qvp6e4aJIETa6uxB5DJio';
-// const tmr_key = 'AkeJ5Mgq4eZP2AADF1gR6PRPr8YqKUPP';
+const tmr_key = 'api-key';
 const params = 'temperature,temperatureApparent,temperatureMin,temperatureMax,windSpeed,windDirection,humidity,pressureSeaLevel,uvIndex,weatherCode,precipitationProbability,precipitationType,sunriseTime,sunsetTime,visibility,moonPhase,cloudCover'
 
 
