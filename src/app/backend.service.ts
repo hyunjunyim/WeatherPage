@@ -6,10 +6,10 @@ import { throwError } from 'rxjs';
 
 import { HOST } from './host-name';
 
-const geo_key = 'AIzaSyCG8KanuoYlwZddj-KIryt0lr5aEixQ2Dw';
-const ipinfo_key = 'f8302db60deeef';
+const geo_key = 'api-key';
+const ipinfo_key = 'api-key';
 const geo_url = 'https://maps.googleapis.com/maps/api/geocode/json?address='
-const ipinfo_url = 'https://ipinfo.io/json?token=f8302db60deeef'
+const ipinfo_url = 'https://ipinfo.io/json?token=api-key'
 
 @Injectable({
   providedIn: 'root',
