@@ -9,9 +9,9 @@ import { Options } from 'ngx-google-places-autocomplete/objects/options/options'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {Location} from '@angular/common';
 
-const geo_key = 'AIzaSyCG8KanuoYlwZddj-KIryt0lr5aEixQ2Dw';
+const geo_key = 'api-key';
 const geo_url = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
-const ipinfo_url = 'https://ipinfo.io/json?token=f8302db60deeef';
+const ipinfo_url = 'https://ipinfo.io/json?token=api-key';
 
 let header = new HttpHeaders();
 header.set('Access-Control-Allow-Origin','*');
