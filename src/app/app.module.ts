@@ -35,7 +35,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     HighchartsChartModule,
     MatTableModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBW6np-N2C-KiBR4v48uBSZkJ2xCFSs23Q'
+      apiKey: 'api-key'
     }),
     GooglePlaceModule,
     MatAutocompleteModule
